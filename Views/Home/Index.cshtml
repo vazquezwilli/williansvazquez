@@ -1,8 +1,21 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<h2>Selecciona 2 Defensores</h2>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<form asp-action="StartGame">
+    <div>
+        <label>Defensor 1:</label>
+        <select name="defender1Id">
+            <option value="1">Rick</option>
+            <option value="2">Morty</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Defensor 2:</label>
+        <select name="defender2Id">
+            <option value="3">Summer</option>
+            <option value="4">Beth</option>
+        </select>
+    </div>
+
+    <button type="submit">Comenzar</button>
+</form>

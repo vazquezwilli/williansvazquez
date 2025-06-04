@@ -1,0 +1,29 @@
+﻿@model Game
+
+<h2>Tienda de Armas</h2>
+
+@for (int i = 0; i < Model.Defenders.Length; i++)
+{
+    var defender = Model.Defenders[i];
+    <div>
+        <h3>@defender.Name - Oro: @defender.Gold</h3>
+
+        <h4>Armas disponibles:</h4>
+        <ul>
+            @foreach (var item in ViewBag.ShopItems)
+            {
+                <li>
+                    @item.Name - Alcance: @item.Range - Costo: @item.Cost
+                    <form asp-action="BuyWeapon" method="post">
+                        <input type="hidden" name="defenderIndex" value="@i" />
+                        <input type="hidden" name="weaponIndex"
+                               value="@ViewBag.ShopItems.IndexOf(item)" />
+                        <button type="submit">Comprar</button>
+                    </form>
+                </li>
+            }
+        </ul>
+    </div>
+}
+
+<a asp-action="Battle" class="btn btn-primary">Ir a la Batalla</a>

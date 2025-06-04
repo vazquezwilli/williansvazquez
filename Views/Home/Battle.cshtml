@@ -1,0 +1,35 @@
+﻿@model Game
+
+<h2>Turno @Model.Turn</h2>
+
+<div>
+    <h3>Estado:</h3>
+    <p>Mantícora: @Model.ManticoreHealth HP (Posición: @Model.ManticorePosition)</p>
+    <p>Ciudad: @Model.CityHealth HP</p>
+</div>
+
+@for (int i = 0; i < Model.Defenders.Length; i++)
+{
+    var defender = Model.Defenders[i];
+    <div>
+        <h3>@defender.Name</h3>
+
+        @if (defender.Weapons.Any())
+        {
+            <form asp-action="Attack" method="post">
+                <input type="hidden" name="defenderIndex" value="@i" />
+                <select name="weaponIndex">
+                    @for (int j = 0; j < defender.Weapons.Count; j++)
+                    {
+                        <option value="@j">@defender.Weapons[j].Name (Alcance: @defender.Weapons[j].Range)</option>
+                    }
+                </select>
+                <button type="submit">Atacar</button>
+            </form>
+        }
+        else
+        {
+            <p>No tiene armas equipadas</p>
+        }
+    </div>
+}
