@@ -1,0 +1,24 @@
+WITH Chars AS (
+    
+    SELECT
+        SUBSTRING('helloworld', 1, 1) AS letter,
+        1 AS position
+    UNION ALL
+   
+    SELECT
+        SUBSTRING('helloworld', position + 1, 1),
+        position + 1
+    FROM
+        Chars
+    WHERE
+        position < LEN('helloworld')
+)
+SELECT
+    letter,
+    COUNT(*) AS countLetters
+FROM
+    Chars
+GROUP BY
+    letter
+ORDER BY
+    letter;
